@@ -2,7 +2,7 @@ const { Router } = require("express");
 const PassageiroController = require("./controllers/Passageiro.controller");
 const PassagemController = require("./controllers/Passagem.controller");
 const PagamentoController = require("./controllers/Pagamento.controller");
-
+const VoosController = require("./controllers/Voo.controller");
 const routes = Router();
 
 //endpoints de passageiros
