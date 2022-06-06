@@ -28,7 +28,7 @@ class PassagemControler {
   }
 
   async buscarPassagem(request, response) {
-    connection.query("SELECT * FROM passagem", (error, results) => {
+    connection.query('SELECT * FROM passagem WHERE passagem.codigo = $1 OR passagem.passageiro = $2', (error, results) => {
       if (error) {
         throw error;
       }

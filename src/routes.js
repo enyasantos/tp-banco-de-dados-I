@@ -8,14 +8,16 @@ const routes = Router();
 //endpoints de passageiros
 routes.get("/passageiros", PassageiroController.index);
 routes.post("/passageiro", PassageiroController.store);
-routes.post("/buscar-passageiro", PassageiroController.buscarPassageiro);
+routes.get("/buscar-passageiro", PassageiroController.buscarPassageiro);
 //endpoints de pagamentos
 routes.get("/pagamentos", PagamentoController.index);
 routes.post("/pagamento", PagamentoController.store);
 //endpoints de passagens
 routes.get("/passagens", PassagemController.index);
 routes.post("/passagem", PassagemController.store);
-routes.post("/buscar-passagem", PassagemController.buscarPassagem);
+routes.get("/buscar-passagem", PassagemController.buscarPassagem);
 //endpoints de voos
+routes.get('/voos', VoosController.buscarTodosVoos)
+routes.get('/buscar-voo', VoosController.buscarVoo)
 
 module.exports = routes;
