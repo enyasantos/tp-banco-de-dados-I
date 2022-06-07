@@ -3,6 +3,6 @@ const INSERIR_PASSAGEM_QUERY = `
             VALUES ($1, $2, $3, $4, $5) RETURNING *
         `;
 
-const LISTAR_PASSAGENS_QUERY = "SELECT * FROM passagem";
+const LISTAR_PASSAGENS_QUERY = "SELECT * FROM passagem, bagagem, pet";
 
 module.exports = { INSERIR_PASSAGEM_QUERY, LISTAR_PASSAGENS_QUERY };
