@@ -105,7 +105,7 @@ CREATE TABLE Passagem(
   codigo char(13) NOT NULL,
   data_emissao DATE NOT NULL,
   assento INT NOT NULL,
-  codigo_voo INT NOT NULL,
+  codigo_voo varchar(20) NOT NULL,
   codigo_pagamento INT NOT NULL,
   cpf_passageiro char(11) NOT NULL,
   PRIMARY KEY(codigo)
@@ -254,7 +254,7 @@ VALUES ('07360850067', 'RS718812834', '5291.00', 'Martim Cunha Pereira', 'Mascul
  
 /* AEROPORTO */
 INSERT INTO public.aeroporto(nome, numero, cidade, logradouro, estado, pais, codigo_postal)
-VALUES ('Aeroporto Deputado Freitas Nobre,', 342, 'São Paulo', 'Avenida Washington Luís', 'SP', 'Brasil', '04626911');
+VALUES ('Aeroporto Deputado Freitas Nobre', 342, 'São Paulo', 'Avenida Washington Luís', 'SP', 'Brasil', '04626911');
 
 INSERT INTO public.aeroporto(nome, numero, cidade, logradouro, estado, pais, codigo_postal)
 VALUES ('Aeroporto Carlos Drummond de Andrade', 204, 'Belo Horizonte', 'Praça Bagatelle', 'MG', 'Brasil', '31270705');
@@ -354,22 +354,22 @@ VALUES (5548373, '5069119824480');
 
 /* AVIAO */
 INSERT INTO aviao(registro, cor, ano_fabricacao, modelo)
-VALUES (0125546, 'azul', TO_DATE('22/03/1999', 'DD/MM/YYYY'), 'Airbus A380');
+VALUES (0125546, 'azul', 1999, 'Airbus A380');
 
 INSERT INTO aviao(registro, cor, ano_fabricacao, modelo)
-VALUES (1236542, 'amarelo', TO_DATE('06/10/1999', 'DD/MM/YYYY'), 'Boeing 707');
+VALUES (1236542, 'amarelo', 1999, 'Boeing 707');
 
 INSERT INTO aviao(registro, cor, ano_fabricacao, modelo)
-VALUES (6532454, 'verde', TO_DATE('10/11/2000', 'DD/MM/YYYY'), 'Airbus A319');
+VALUES (6532454, 'verde', 2000, 'Airbus A319');
 
 INSERT INTO aviao(registro, cor, ano_fabricacao, modelo)
-VALUES (4521365, 'rosa', TO_DATE('20/05/1999', 'DD/MM/YYYY'), 'ATR 42–500');
+VALUES (4521365, 'rosa', 1999, 'ATR 42–500');
 
 INSERT INTO aviao(registro, cor, ano_fabricacao, modelo)
-VALUES (6332542, 'preto', TO_DATE('14/01/1970', 'DD/MM/YYYY'), 'Embraer 190');
+VALUES (6332542, 'preto', 1970, 'Embraer 190');
 
 INSERT INTO aviao(registro, cor, ano_fabricacao, modelo)
-VALUES (3632254, 'branco', TO_DATE('21/02/1992', 'DD/MM/YYYY'), 'Boeing 757');
+VALUES (3632254, 'branco', 1992, 'Boeing 757');
 
 /* ITINERARIO */
 INSERT INTO itinerario(codigo, tempo_duracao_minutos, aeroporto_origem, aeroporto_destino)
@@ -410,40 +410,40 @@ INSERT INTO voo(codigo, data, registro, cpf_piloto, codigo_itinerario)
 VALUES (6, TO_DATE('11/05/2020', 'DD/MM/YYYY'), 3632254, '65193378892',5);
 
 /* TRABALHA_EM */
-INSERT INTO trabalhaem(cpf_comissario, cpf_voo)
+INSERT INTO trabalhaem(cpf_comissario, codigo_voo)
 VALUES ('96465590287', '1');
 
-INSERT INTO trabalhaem(cpf_comissario, cpf_voo)
+INSERT INTO trabalhaem(cpf_comissario, codigo_voo)
 VALUES ('96465590287', '2');
 
-INSERT INTO trabalhaem(cpf_comissario, cpf_voo)
+INSERT INTO trabalhaem(cpf_comissario, codigo_voo)
 VALUES ('32122843929', '2');
 
-INSERT INTO trabalhaem(cpf_comissario, cpf_voo)
+INSERT INTO trabalhaem(cpf_comissario, codigo_voo)
 VALUES ('32122843929', '3');
 
-INSERT INTO trabalhaem(cpf_comissario, cpf_voo)
+INSERT INTO trabalhaem(cpf_comissario, codigo_voo)
 VALUES ('37083365362', '3');
 
-INSERT INTO trabalhaem(cpf_comissario, cpf_voo)
+INSERT INTO trabalhaem(cpf_comissario, codigo_voo)
 VALUES ('37083365362', '4');
 
-INSERT INTO trabalhaem(cpf_comissario, cpf_voo)
+INSERT INTO trabalhaem(cpf_comissario, codigo_voo)
 VALUES ('21397522302', '4');
 
-INSERT INTO trabalhaem(cpf_comissario, cpf_voo)
+INSERT INTO trabalhaem(cpf_comissario, codigo_voo)
 VALUES ('21397522302', '5');
 
-INSERT INTO trabalhaem(cpf_comissario, cpf_voo)
+INSERT INTO trabalhaem(cpf_comissario, codigo_voo)
 VALUES ('96465590287', '5');
 
-INSERT INTO trabalhaem(cpf_comissario, cpf_voo)
+INSERT INTO trabalhaem(cpf_comissario, codigo_voo)
 VALUES ('96465590287', '6');
 
-INSERT INTO trabalhaem(cpf_comissario, cpf_voo)
+INSERT INTO trabalhaem(cpf_comissario, codigo_voo)
 VALUES ('07360850067', '6');
 
-INSERT INTO trabalhaem(cpf_comissario, cpf_voo)
+INSERT INTO trabalhaem(cpf_comissario, codigo_voo)
 VALUES ('07360850067', '1');
 
 /* PASSAGEM */
@@ -468,22 +468,22 @@ VALUES (6, TO_DATE('04/06/2022', 'DD/MM/YYYY'), 6, 3, 3502754,'10891340304');
 
 /* PET */
 INSERT INTO pet(codigo_passagem, nome, peso, porte, cor, nome_raca)
-VALUES (1, 'Matilda', 12.0,'pequeno','Buldogue');
+VALUES (1, 'Matilda', 12.0,'pequeno','marrom','Buldogue');
 
 INSERT INTO pet(codigo_passagem, nome, peso, porte, cor, nome_raca)
-VALUES (2, 'Maralvo', 22.3,'grande','Golden Retriever');
+VALUES (2, 'Maralvo', 22.3,'grande', 'amarelo', 'Golden Retriever');
 
 INSERT INTO pet(codigo_passagem, nome, peso, porte, cor, nome_raca)
-VALUES (3, 'Maggie', 16.1,'medio','Poodle');
+VALUES (3, 'Maggie', 16.1,'medio', 'branco', 'Poodle');
 
 INSERT INTO pet(codigo_passagem, nome, peso, porte, cor, nome_raca)
-VALUES (4, 'Donnie', 10.4,'pequeno','Persa');
+VALUES (4, 'Donnie', 10.4,'pequeno', 'branco', 'Persa');
 
 INSERT INTO pet(codigo_passagem, nome, peso, porte, cor, nome_raca)
-VALUES (5, 'Tibursio', 9.9,'pequeno','Siamês');
+VALUES (5, 'Tibursio', 9.9,'pequeno', 'bege', 'Siamês');
 
 INSERT INTO pet(codigo_passagem, nome, peso, porte, cor, nome_raca)
-VALUES (6, 'Tibbers', 12.5,'pequeno','Siberiano');
+VALUES (6, 'Tibbers', 12.5,'pequeno', 'cinza', 'Siberiano');
 
 /* BAGAGEM */
 INSERT INTO bagagem(codigo, codigo_passagem, peso, largura, altura)
