@@ -4,14 +4,6 @@ CREATE TABLE Tipo(
   PRIMARY KEY(modelo)
 );
 
-CREATE TABLE Aviao(
-  registro varchar(25) NOT NULL UNIQUE,
-  cor varchar(25),
-  ano_fabricacao INT,
-  modelo varchar(25),
-  PRIMARY KEY(registro)
-);
-
 CREATE TABLE Voo(
   codigo varchar(20) NOT NULL UNIQUE,
   data DATE,
@@ -21,54 +13,18 @@ CREATE TABLE Voo(
   PRIMARY KEY(codigo)
 );
 
-CREATE TABLE Pagamento(
-  codigo INT NOT NULL UNIQUE,
-  valor REAL,
-  PRIMARY KEY(codigo)
+CREATE TABLE Aviao(
+  registro varchar(25) NOT NULL UNIQUE,
+  cor varchar(25),
+  ano_fabricacao INT,
+  modelo varchar(25),
+  PRIMARY KEY(registro)
 );
 
-CREATE TABLE Dinheiro(
-  codigo_pagamento INT NOT NULL,
-  valor_pago REAL,
-  troco REAL,
-  PRIMARY KEY(codigo_pagamento)
-);
-
-CREATE TABLE CartaoCredito(
-  codigo_pagamento INT NOT NULL,
-  numero_cartao INT,
-  bandeira varchar(30),
-  data_expiracao date,
-  codigo_seguranca INT,
-  PRIMARY KEY(codigo_pagamento)
-);
-
-CREATE TABLE Debito(
-  codigo_pagamento INT NOT NULL,
-  agencia INT,
-  conta INT,
-  PRIMARY KEY(codigo_pagamento)
-);
-
-CREATE TABLE Boleto(
-  codigo_pagamento INT NOT NULL,
-  codigo_barras varchar(13),
-  PRIMARY KEY(codigo_pagamento)
-);
-
-CREATE TABLE Passageiro(
-  cpf char(11) NOT NULL UNIQUE,
-  nome varchar(50),
-  sexo char(13),
-  rg char(10) NOT NULL UNIQUE,
-  data_nascimento DATE,
-  PRIMARY KEY(cpf)
-);
-
-CREATE TABLE TelefonePassageiro(
-  cpf_passageiro char(11) NOT NULL,
-  telefone char(11) NOT NULL,
-  PRIMARY KEY(cpf_passageiro, telefone)
+CREATE TABLE TrabalhaEm(
+  cpf_comissario char(11) NOT NULL,
+  codigo_voo varchar(20) NOT NULL,
+  PRIMARY KEY(cpf_comissario, codigo_voo)
 );
 
 CREATE TABLE Piloto(
@@ -95,10 +51,54 @@ CREATE TABLE ComissarioBordo(
   PRIMARY KEY(cpf)
 );
 
-CREATE TABLE TrabalhaEm(
-  cpf_comissario char(11) NOT NULL,
-  codigo_voo varchar(20) NOT NULL,
-  PRIMARY KEY(cpf_comissario, codigo_voo)
+CREATE TABLE Pagamento(
+  codigo INT NOT NULL UNIQUE,
+  valor REAL,
+  PRIMARY KEY(codigo)
+);
+
+CREATE TABLE Dinheiro(
+  codigo_pagamento INT NOT NULL,
+  valor_pago REAL,
+  troco REAL,
+  PRIMARY KEY(codigo_pagamento)
+);
+
+CREATE TABLE CartaoCredito(
+  codigo_pagamento INT NOT NULL,
+  numero_cartao INT,
+  bandeira varchar(30),
+  data_expiracao date,
+  codigo_seguranca INT,
+  PRIMARY KEY(codigo_pagamento)
+);
+
+CREATE TABLE Boleto(
+  codigo_pagamento INT NOT NULL,
+  codigo_barras varchar(13),
+  PRIMARY KEY(codigo_pagamento)
+);
+
+CREATE TABLE Debito(
+  codigo_pagamento INT NOT NULL,
+  agencia INT,
+  conta INT,
+  PRIMARY KEY(codigo_pagamento)
+);
+
+CREATE TABLE Passageiro(
+  cpf char(11) NOT NULL UNIQUE,
+  nome varchar(50),
+  sexo char(13),
+  rg char(10) NOT NULL UNIQUE,
+  data_nascimento DATE,
+  PRIMARY KEY(cpf)
+);
+
+CREATE TABLE TelefonePassageiro(
+  cpf_passageiro char(11) NOT NULL,
+  telefone char(11) NOT NULL,
+  PRIMARY KEY(cpf_passageiro, telefone)
 );
 
 CREATE TABLE Passagem(
@@ -111,12 +111,6 @@ CREATE TABLE Passagem(
   PRIMARY KEY(codigo)
 );
 
-CREATE TABLE Raca(
-  nome varchar(50) NOT NULL UNIQUE,
-  especie varchar(50) NOT NULL,
-  PRIMARY KEY(nome)
-);
-
 CREATE TABLE Pet(
   codigo_passagem char(13) NOT NULL,
   nome varchar(50) NOT NULL,
@@ -127,6 +121,12 @@ CREATE TABLE Pet(
   PRIMARY KEY(codigo_passagem, nome)
 );
 
+CREATE TABLE Raca(
+  nome varchar(50) NOT NULL UNIQUE,
+  especie varchar(50) NOT NULL,
+  PRIMARY KEY(nome)
+);
+
 CREATE TABLE Bagagem(
   codigo char(13) NOT NULL UNIQUE, /*Dominio escolhido arbitrariamente*/
   codigo_passagem char(13) NOT NULL, 
@@ -134,6 +134,15 @@ CREATE TABLE Bagagem(
   largura REAL NOT NULL,
   altura REAL NOT NULL,
   profundidade REAL NOT NULL,
+  PRIMARY KEY(codigo)
+);
+
+CREATE TABLE Itinerario(
+  codigo INT NOT NULL UNIQUE, 
+  tempo_duracao_minutos INT NOT NULL,
+  horario TIME NOT NULL, 
+  aeroporto_origem varchar(50) NOT NULL,
+  aeroporto_destino varchar(50) NOT NULL,
   PRIMARY KEY(codigo)
 );
 
@@ -148,36 +157,21 @@ CREATE TABLE Aeroporto(
   PRIMARY KEY(nome)
 );
 
-CREATE TABLE Itinerario(
-  codigo INT NOT NULL UNIQUE, 
-  tempo_duracao_minutos INT NOT NULL,
-  horario TIME NOT NULL, 
-  aeroporto_origem varchar(50) NOT NULL,
-  aeroporto_destino varchar(50) NOT NULL,
-  PRIMARY KEY(codigo)
-);
-
 ALTER TABLE Aviao ADD FOREIGN KEY (modelo) REFERENCES Tipo(modelo) ON DELETE NO ACTION ON UPDATE CASCADE;
 
-ALTER TABLE Voo ADD FOREIGN KEY (registro) REFERENCES Aviao(registro) ON DELETE NO ACTION ON UPDATE CASCADE;
+ALTER TABLE Bagagem ADD FOREIGN KEY (codigo_passagem) REFERENCES Passagem(codigo) ON DELETE CASCADE ON UPDATE CASCADE;
 
-ALTER TABLE Voo ADD FOREIGN KEY (cpf_piloto) REFERENCES Piloto(cpf) ON DELETE NO ACTION ON UPDATE CASCADE;
-
-ALTER TABLE Voo ADD FOREIGN KEY (codigo_itinerario) REFERENCES Itinerario(codigo) ON DELETE NO ACTION ON UPDATE CASCADE;
-
-ALTER TABLE Dinheiro ADD FOREIGN KEY (codigo_pagamento) REFERENCES Pagamento(codigo) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE Boleto ADD FOREIGN KEY (codigo_pagamento) REFERENCES Pagamento(codigo) ON DELETE CASCADE ON UPDATE CASCADE;
 
 ALTER TABLE CartaoCredito ADD FOREIGN KEY (codigo_pagamento) REFERENCES Pagamento(codigo) ON DELETE CASCADE ON UPDATE CASCADE;
 
 ALTER TABLE Debito ADD FOREIGN KEY (codigo_pagamento) REFERENCES Pagamento(codigo) ON DELETE CASCADE ON UPDATE CASCADE;
 
-ALTER TABLE Boleto ADD FOREIGN KEY (codigo_pagamento) REFERENCES Pagamento(codigo) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE Dinheiro ADD FOREIGN KEY (codigo_pagamento) REFERENCES Pagamento(codigo) ON DELETE CASCADE ON UPDATE CASCADE;
 
-ALTER TABLE TelefonePassageiro ADD FOREIGN KEY (cpf_passageiro) REFERENCES Passageiro(cpf) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE Itinerario ADD FOREIGN KEY (aeroporto_origem) REFERENCES Aeroporto(nome) ON DELETE NO ACTION ON UPDATE CASCADE;
 
-ALTER TABLE TrabalhaEm ADD FOREIGN KEY (cpf_comissario) REFERENCES ComissarioBordo(cpf) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
-ALTER TABLE TrabalhaEm ADD FOREIGN KEY (codigo_voo) REFERENCES Voo(codigo) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE Itinerario ADD FOREIGN KEY (aeroporto_destino) REFERENCES Aeroporto(nome) ON DELETE NO ACTION ON UPDATE CASCADE;
 
 ALTER TABLE Passagem ADD FOREIGN KEY (codigo_pagamento) REFERENCES Pagamento(codigo) ON DELETE NO ACTION ON UPDATE CASCADE;
 
@@ -189,12 +183,17 @@ ALTER TABLE Pet ADD FOREIGN KEY (codigo_passagem) REFERENCES Passagem(codigo) ON
 
 ALTER TABLE Pet ADD FOREIGN KEY (nome_raca) REFERENCES Raca(nome) ON DELETE NO ACTION ON UPDATE CASCADE;
 
-ALTER TABLE Bagagem ADD FOREIGN KEY (codigo_passagem) REFERENCES Passagem(codigo) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE TelefonePassageiro ADD FOREIGN KEY (cpf_passageiro) REFERENCES Passageiro(cpf) ON DELETE CASCADE ON UPDATE CASCADE;
 
-ALTER TABLE Itinerario ADD FOREIGN KEY (aeroporto_origem) REFERENCES Aeroporto(nome) ON DELETE NO ACTION ON UPDATE CASCADE;
+ALTER TABLE TrabalhaEm ADD FOREIGN KEY (cpf_comissario) REFERENCES ComissarioBordo(cpf) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
-ALTER TABLE Itinerario ADD FOREIGN KEY (aeroporto_destino) REFERENCES Aeroporto(nome) ON DELETE NO ACTION ON UPDATE CASCADE;
+ALTER TABLE TrabalhaEm ADD FOREIGN KEY (codigo_voo) REFERENCES Voo(codigo) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
+ALTER TABLE Voo ADD FOREIGN KEY (registro) REFERENCES Aviao(registro) ON DELETE NO ACTION ON UPDATE CASCADE;
+
+ALTER TABLE Voo ADD FOREIGN KEY (cpf_piloto) REFERENCES Piloto(cpf) ON DELETE NO ACTION ON UPDATE CASCADE;
+
+ALTER TABLE Voo ADD FOREIGN KEY (codigo_itinerario) REFERENCES Itinerario(codigo) ON DELETE NO ACTION ON UPDATE CASCADE;
 
 /* TIPO */
 INSERT INTO tipo(modelo, capacidade)
