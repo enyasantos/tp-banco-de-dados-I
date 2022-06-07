@@ -28,13 +28,16 @@ class PassagemControler {
   }
 
   async buscarPassagem(request, response) {
-    const {codigo, cpf_passageiro} = request.body;
+    const { keyword } = request.params;
     connection.query(
-      `SELECT * FROM passagem, bagagem, pet
+      `SELECT passagem.codigo, data_emissao, assento,
+      codigo_voo, codigo_pagamento, cpf_passageiro, bagagem.codigo AS codigo_bagagem,
+      bagagem.peso AS bagagem_peso, pet.peso AS pet_peso, cor, pet.nome AS pet_nome
+      FROM passagem, bagagem, pet
       WHERE passagem.codigo = $1 OR passagem.cpf_passageiro = $2 
       AND bagagem.codigo_passagem = passagem.codigo 
       AND pet.codigo_passagem = passagem.codigo`,
-      [codigo, cpf_passageiro],
+      [keyword, keyword],
     (error, results) => {
       if (error) {
         throw error;
