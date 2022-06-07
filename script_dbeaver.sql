@@ -1,11 +1,11 @@
 CREATE TABLE Tipo(
-  modelo varchar(25) NOT NULL,
+  modelo varchar(25) NOT NULL UNIQUE,
   capacidade INT,
   PRIMARY KEY(modelo)
 );
 
 CREATE TABLE Aviao(
-  registro varchar(25) NOT NULL,
+  registro varchar(25) NOT NULL UNIQUE,
   cor varchar(25),
   ano_fabricacao INT,
   modelo varchar(25),
@@ -13,7 +13,7 @@ CREATE TABLE Aviao(
 );
 
 CREATE TABLE Voo(
-  codigo varchar(20) NOT NULL,
+  codigo varchar(20) NOT NULL UNIQUE,
   data DATE,
   registro varchar(25),
   cpf_piloto char(11),
@@ -22,7 +22,7 @@ CREATE TABLE Voo(
 );
 
 CREATE TABLE Pagamento(
-  codigo INT NOT NULL,
+  codigo INT NOT NULL UNIQUE,
   valor REAL,
   PRIMARY KEY(codigo)
 );
@@ -57,10 +57,10 @@ CREATE TABLE Boleto(
 );
 
 CREATE TABLE Passageiro(
-  cpf char(11) NOT NULL,
+  cpf char(11) NOT NULL UNIQUE,
   nome varchar(50),
   sexo char(13),
-  rg char(10),
+  rg char(10) NOT NULL UNIQUE,
   data_nascimento DATE,
   PRIMARY KEY(cpf)
 );
@@ -72,8 +72,8 @@ CREATE TABLE TelefonePassageiro(
 );
 
 CREATE TABLE Piloto(
-  cpf char(11) NOT NULL,
-  rg varchar(13) NOT NULL,
+  cpf char(11) NOT NULL UNIQUE,
+  rg varchar(13) NOT NULL UNIQUE,
   salario REAL NOT NULL,
   nome varchar(50) NOT NULL,
   sexo varchar(13) NOT NULL,
@@ -84,8 +84,8 @@ CREATE TABLE Piloto(
 );
 
 CREATE TABLE ComissarioBordo(
-  cpf char(11) NOT NULL,
-  rg varchar(13) NOT NULL,
+  cpf char(11) NOT NULL UNIQUE,
+  rg varchar(13) NOT NULL UNIQUE,
   salario REAL NOT NULL,
   nome varchar(50) NOT NULL,
   sexo varchar(13) NOT NULL,
@@ -102,7 +102,7 @@ CREATE TABLE TrabalhaEm(
 );
 
 CREATE TABLE Passagem(
-  codigo char(13) NOT NULL,
+  codigo char(13) NOT NULL UNIQUE,
   data_emissao DATE NOT NULL,
   assento INT NOT NULL,
   codigo_voo varchar(20) NOT NULL,
@@ -112,7 +112,7 @@ CREATE TABLE Passagem(
 );
 
 CREATE TABLE Raca(
-  nome varchar(50) NOT NULL,
+  nome varchar(50) NOT NULL UNIQUE,
   especie varchar(50) NOT NULL,
   PRIMARY KEY(nome)
 );
@@ -128,7 +128,7 @@ CREATE TABLE Pet(
 );
 
 CREATE TABLE Bagagem(
-  codigo char(13) NOT NULL, /*Dominio escolhido arbitrariamente*/
+  codigo char(13) NOT NULL UNIQUE, /*Dominio escolhido arbitrariamente*/
   codigo_passagem char(13) NOT NULL, 
   peso REAL NOT NULL,
   largura REAL NOT NULL,
@@ -138,8 +138,8 @@ CREATE TABLE Bagagem(
 );
 
 CREATE TABLE Aeroporto(
-  nome varchar(50) NOT NULL,
-  numero INT NOT NULL, 
+  nome varchar(50) NOT NULL UNIQUE,
+  numero INT NOT NULL UNIQUE, 
   cidade varchar(50) NOT NULL,
   logradouro varchar(50) NOT NULL,
   estado char(2) NOT NULL,
@@ -149,7 +149,7 @@ CREATE TABLE Aeroporto(
 );
 
 CREATE TABLE Itinerario(
-  codigo INT NOT NULL, 
+  codigo INT NOT NULL UNIQUE, 
   tempo_duracao_minutos INT NOT NULL,
   horario TIME NOT NULL, 
   aeroporto_origem varchar(50) NOT NULL,
@@ -157,11 +157,11 @@ CREATE TABLE Itinerario(
   PRIMARY KEY(codigo)
 );
 
-ALTER TABLE Aviao ADD FOREIGN KEY (modelo) REFERENCES Tipo(modelo); ON DELETE NO ACTION ON UPDATE CASCADE
+ALTER TABLE Aviao ADD FOREIGN KEY (modelo) REFERENCES Tipo(modelo) ON DELETE NO ACTION ON UPDATE CASCADE;
 
-ALTER TABLE Voo ADD FOREIGN KEY (registro) REFERENCES Aviao(registro); ON DELETE NO ACTION ON UPDATE CASCADE
+ALTER TABLE Voo ADD FOREIGN KEY (registro) REFERENCES Aviao(registro) ON DELETE NO ACTION ON UPDATE CASCADE;
 
-ALTER TABLE Voo ADD FOREIGN KEY (cpf_piloto) REFERENCES Piloto(cpf); ON DELETE NO ACTION ON UPDATE CASCADE
+ALTER TABLE Voo ADD FOREIGN KEY (cpf_piloto) REFERENCES Piloto(cpf) ON DELETE NO ACTION ON UPDATE CASCADE;
 
 ALTER TABLE Voo ADD FOREIGN KEY (codigo_itinerario) REFERENCES Itinerario(codigo) ON DELETE NO ACTION ON UPDATE CASCADE;
 
