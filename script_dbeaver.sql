@@ -149,7 +149,8 @@ CREATE TABLE Aeroporto(
 
 CREATE TABLE Itinerario(
   codigo INT NOT NULL, 
-  tempo_duracao_minutos INT NOT NULL, 
+  tempo_duracao_minutos INT NOT NULL,
+  horario TIME NOT NULL, 
   aeroporto_origem varchar(50) NOT NULL,
   aeroporto_destino varchar(50) NOT NULL,
   PRIMARY KEY(codigo)
@@ -372,23 +373,23 @@ INSERT INTO aviao(registro, cor, ano_fabricacao, modelo)
 VALUES (3632254, 'branco', 1992, 'Boeing 757');
 
 /* ITINERARIO */
-INSERT INTO itinerario(codigo, tempo_duracao_minutos, aeroporto_origem, aeroporto_destino)
-VALUES (1, 50, 'Aeroporto Deputado Freitas Nobre', 'Aeroporto Carlos Drummond de Andrade');
+INSERT INTO itinerario(codigo, tempo_duracao_minutos, horario, aeroporto_origem, aeroporto_destino)
+VALUES (1, 50, 'Aeroporto Deputado Freitas Nobre', 13:30,'Aeroporto Carlos Drummond de Andrade');
 
-INSERT INTO itinerario(codigo, tempo_duracao_minutos, aeroporto_origem, aeroporto_destino)
-VALUES (2, 45, 'Aeroporto Carlos Drummond de Andrade', 'Aeroporto Zumbi dos Palmares');
+INSERT INTO itinerario(codigo, tempo_duracao_minutos, horario, aeroporto_origem, aeroporto_destino)
+VALUES (2, 45, 'Aeroporto Carlos Drummond de Andrade', 15:30,'Aeroporto Zumbi dos Palmares');
 
-INSERT INTO itinerario(codigo, tempo_duracao_minutos, aeroporto_origem, aeroporto_destino)
-VALUES (3, 60, 'Aeroporto Zumbi dos Palmares', 'Aeroporto Internacional de Campo Grande');
+INSERT INTO itinerario(codigo, tempo_duracao_minutos, horario, aeroporto_origem, aeroporto_destino)
+VALUES (3, 60, 'Aeroporto Zumbi dos Palmares', 9:30,'Aeroporto Internacional de Campo Grande');
 
-INSERT INTO itinerario(codigo, tempo_duracao_minutos, aeroporto_origem, aeroporto_destino)
-VALUES (4, 70, 'Aeroporto Internacional de Campo Grande', 'Aeroporto Salgado Filho');
+INSERT INTO itinerario(codigo, tempo_duracao_minutos, horario, aeroporto_origem, aeroporto_destino)
+VALUES (4, 70, 'Aeroporto Internacional de Campo Grande', 10:00,'Aeroporto Salgado Filho');
 
-INSERT INTO itinerario(codigo, tempo_duracao_minutos, aeroporto_origem, aeroporto_destino)
-VALUES (5, 35, 'Aeroporto Salgado Filho', 'Aeroporto de Porto Seguro');
+INSERT INTO itinerario(codigo, tempo_duracao_minutos, horario, aeroporto_origem, aeroporto_destino)
+VALUES (5, 35, 'Aeroporto Salgado Filho', 20:00,'Aeroporto de Porto Seguro');
 
-INSERT INTO itinerario(codigo, tempo_duracao_minutos, aeroporto_origem, aeroporto_destino)
-VALUES (6, 90, 'Aeroporto de Porto Seguro', 'Aeroporto Deputado Freitas Nobre');
+INSERT INTO itinerario(codigo, tempo_duracao_minutos, horario, aeroporto_origem, aeroporto_destino)
+VALUES (6, 90, 'Aeroporto de Porto Seguro', 17:50,'Aeroporto Deputado Freitas Nobre');
 
 /* VOO */
 INSERT INTO voo(codigo, data, registro, cpf_piloto, codigo_itinerario)
