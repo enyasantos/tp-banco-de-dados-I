@@ -133,6 +133,7 @@ CREATE TABLE Bagagem(
   peso REAL NOT NULL,
   largura REAL NOT NULL,
   altura REAL NOT NULL,
+  profundidade REAL NOT NULL,
   PRIMARY KEY(codigo)
 );
 
@@ -149,7 +150,8 @@ CREATE TABLE Aeroporto(
 
 CREATE TABLE Itinerario(
   codigo INT NOT NULL, 
-  tempo_duracao_minutos INT NOT NULL, 
+  tempo_duracao_minutos INT NOT NULL,
+  horario TIME NOT NULL, 
   aeroporto_origem varchar(50) NOT NULL,
   aeroporto_destino varchar(50) NOT NULL,
   PRIMARY KEY(codigo)
@@ -372,23 +374,23 @@ INSERT INTO aviao(registro, cor, ano_fabricacao, modelo)
 VALUES (3632254, 'branco', 1992, 'Boeing 757');
 
 /* ITINERARIO */
-INSERT INTO itinerario(codigo, tempo_duracao_minutos, aeroporto_origem, aeroporto_destino)
-VALUES (1, 50, 'Aeroporto Deputado Freitas Nobre', 'Aeroporto Carlos Drummond de Andrade');
+INSERT INTO itinerario(codigo, tempo_duracao_minutos, horario, aeroporto_origem, aeroporto_destino)
+VALUES (1, 50, '13:30:00', 'Aeroporto Deputado Freitas Nobre', 'Aeroporto Carlos Drummond de Andrade');
 
-INSERT INTO itinerario(codigo, tempo_duracao_minutos, aeroporto_origem, aeroporto_destino)
-VALUES (2, 45, 'Aeroporto Carlos Drummond de Andrade', 'Aeroporto Zumbi dos Palmares');
+INSERT INTO itinerario(codigo, tempo_duracao_minutos, horario, aeroporto_origem, aeroporto_destino)
+VALUES (2, 45, '15:30:00', 'Aeroporto Carlos Drummond de Andrade', 'Aeroporto Zumbi dos Palmares');
 
-INSERT INTO itinerario(codigo, tempo_duracao_minutos, aeroporto_origem, aeroporto_destino)
-VALUES (3, 60, 'Aeroporto Zumbi dos Palmares', 'Aeroporto Internacional de Campo Grande');
+INSERT INTO itinerario(codigo, tempo_duracao_minutos, horario, aeroporto_origem, aeroporto_destino)
+VALUES (3, 60, '9:30:00', 'Aeroporto Zumbi dos Palmares', 'Aeroporto Internacional de Campo Grande');
 
-INSERT INTO itinerario(codigo, tempo_duracao_minutos, aeroporto_origem, aeroporto_destino)
-VALUES (4, 70, 'Aeroporto Internacional de Campo Grande', 'Aeroporto Salgado Filho');
+INSERT INTO itinerario(codigo, tempo_duracao_minutos, horario, aeroporto_origem, aeroporto_destino)
+VALUES (4, 70, '10:00:00', 'Aeroporto Internacional de Campo Grande', 'Aeroporto Salgado Filho');
 
-INSERT INTO itinerario(codigo, tempo_duracao_minutos, aeroporto_origem, aeroporto_destino)
-VALUES (5, 35, 'Aeroporto Salgado Filho', 'Aeroporto de Porto Seguro');
+INSERT INTO itinerario(codigo, tempo_duracao_minutos, horario, aeroporto_origem, aeroporto_destino)
+VALUES (5, 35, '20:00:00', 'Aeroporto Salgado Filho', 'Aeroporto de Porto Seguro');
 
-INSERT INTO itinerario(codigo, tempo_duracao_minutos, aeroporto_origem, aeroporto_destino)
-VALUES (6, 90, 'Aeroporto de Porto Seguro', 'Aeroporto Deputado Freitas Nobre');
+INSERT INTO itinerario(codigo, tempo_duracao_minutos, horario, aeroporto_origem, aeroporto_destino)
+VALUES (6, 90, '17:50:00', 'Aeroporto de Porto Seguro', 'Aeroporto Deputado Freitas Nobre');
 
 /* VOO */
 INSERT INTO voo(codigo, data, registro, cpf_piloto, codigo_itinerario)
@@ -486,33 +488,32 @@ INSERT INTO pet(codigo_passagem, nome, peso, porte, cor, nome_raca)
 VALUES (6, 'Tibbers', 12.5,'pequeno', 'cinza', 'Siberiano');
 
 /* BAGAGEM */
-INSERT INTO bagagem(codigo, codigo_passagem, peso, largura, altura)
-VALUES (1, 3, 12.5,35.5,45.5);
+INSERT INTO bagagem(codigo, codigo_passagem, peso, largura, altura, profundidade)
+VALUES (1, 3, 12.5,35.5,45.5, 10.3);
 
-INSERT INTO bagagem(codigo, codigo_passagem, peso, largura, altura)
-VALUES (2, 1, 12.5,35.5,45.5);
+INSERT INTO bagagem(codigo, codigo_passagem, peso, largura, altura, profundidade)
+VALUES (2, 1, 12.5,35.5,45.5, 20.5);
 
-INSERT INTO bagagem(codigo, codigo_passagem, peso, largura, altura)
-VALUES (3, 2, 12.5,35.5,45.5);
+INSERT INTO bagagem(codigo, codigo_passagem, peso, largura, altura, profundidade)
+VALUES (3, 2, 12.5,35.5,45.5, 6.12);
 
-INSERT INTO bagagem(codigo, codigo_passagem, peso, largura, altura)
-VALUES (4, 5, 12.5,35.5,45.5);
+INSERT INTO bagagem(codigo, codigo_passagem, peso, largura, altura, profundidade)
+VALUES (4, 5, 12.5,35.5,45.5, 12.5);
 
-INSERT INTO bagagem(codigo, codigo_passagem, peso, largura, altura)
-VALUES (5, 6, 12.5,35.5,45.5);
+INSERT INTO bagagem(codigo, codigo_passagem, peso, largura, altura, profundidade)
+VALUES (5, 6, 12.5,35.5,45.5, 10.3);
 
-INSERT INTO bagagem(codigo, codigo_passagem, peso, largura, altura)
-VALUES (6, 4, 12.5,35.5,45.5);
+INSERT INTO bagagem(codigo, codigo_passagem, peso, largura, altura, profundidade)
+VALUES (6, 4, 12.5,35.5,45.5, 20.5);
 
+INSERT INTO bagagem(codigo, codigo_passagem, peso, largura, altura, profundidade)
+VALUES (7, 3, 12.5,45.5,55.5, 20.5);
 
-INSERT INTO bagagem(codigo, codigo_passagem, peso, largura, altura)
-VALUES (7, 3, 12.5,45.5,55.5);
+INSERT INTO bagagem(codigo, codigo_passagem, peso, largura, altura, profundidade)
+VALUES (8, 3, 12.5,45.5,55.5, 5.63);
 
-INSERT INTO bagagem(codigo, codigo_passagem, peso, largura, altura)
-VALUES (8, 3, 12.5,45.5,55.5);
-
-INSERT INTO bagagem(codigo, codigo_passagem, peso, largura, altura)
-VALUES (9, 4, 12.5,45.5,55.5);
+INSERT INTO bagagem(codigo, codigo_passagem, peso, largura, altura, profundidade)
+VALUES (9, 4, 12.5,45.5,55.5, 25.33);
 
 /* Telefone Passageiro */
 INSERT INTO telefonepassageiro(cpf_passageiro, telefone)
