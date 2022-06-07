@@ -12,6 +12,7 @@ const routes = Router();
 routes.get("/passageiros", PassageiroController.index);
 routes.post("/passageiro", PassageiroController.store);
 routes.get("/buscar-passageiro", PassageiroController.buscarPassageiro);
+routes.delete("/deletar-passageiro", PassageiroController.deletePassageiro);
 //endpoints de pagamentos
 routes.get("/pagamentos", PagamentoController.index);
 routes.post("/pagamento", PagamentoController.store);
