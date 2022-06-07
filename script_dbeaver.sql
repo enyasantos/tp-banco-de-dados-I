@@ -67,8 +67,8 @@ CREATE TABLE Passageiro(
 
 CREATE TABLE TelefonePassageiro(
   cpf_passageiro char(11) NOT NULL,
-  telefone INT,
-  PRIMARY KEY(cpf_passageiro)
+  telefone char(11) NOT NULL,
+  PRIMARY KEY(cpf_passageiro, telefone)
 );
 
 CREATE TABLE Piloto(
