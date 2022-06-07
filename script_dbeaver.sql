@@ -244,7 +244,7 @@ INSERT INTO public.comissariobordo(cpf, rg, salario, nome, sexo, carga_horaria, 
 VALUES ('21397522302', 'MS710850361', '4591.00', 'Breno Pereira Rodrigues', 'Masculino', 44, TO_DATE('05/03/1976', 'DD/MM/YYYY'), '6589598259');
 
 INSERT INTO public.comissariobordo(cpf, rg, salario, nome, sexo, carga_horaria, data_nascimento, cht)
-VALUES ('96465590287', 'BA060942448', '3997.00', 'Luana Rocha Santos', 'Feminino', 40, TO_DATE('22/02/1980', 'DD/MM/YYYY'), '4997561893');
+VALUES ('96465590247', 'BA060942448', '3997.00', 'Luana Rocha Santos', 'Feminino', 40, TO_DATE('22/02/1980', 'DD/MM/YYYY'), '4997561893');
 
 INSERT INTO public.comissariobordo(cpf, rg, salario, nome, sexo, carga_horaria, data_nascimento, cht)
 VALUES ('07360850067', 'RS718812834', '5291.00', 'Martim Cunha Pereira', 'Masculino', 44, TO_DATE('14/04/1999', 'DD/MM/YYYY'), '5382089063');
